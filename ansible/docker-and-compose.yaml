@@ -1,6 +1,6 @@
 ---
 - name: Install python3, docker, docker-compose
-  hosts: all
+  hosts: tag_Name_servers
   become: yes
   gather_facts: False
   tasks:
