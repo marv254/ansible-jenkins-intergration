@@ -1,6 +1,6 @@
 ---
 - name: Install python3, docker, docker-compose
-  hosts: all
+  hosts: 13.244.186.168,13.245.233.246
   become: yes
   gather_facts: False
   tasks:
