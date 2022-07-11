@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-apt update
-apt install ansible -y
-apt install python3-pip -y
+sudo yum update
+sudo yum install ansible -y
+sudo yum install python3-pip -y
 pip3 install boto3 botocore
 
 # export AWS_ACCESS_KEY_ID=$1
