@@ -6,7 +6,7 @@ pipeline{
                 script{
                     echo "Copying all nesessary files to ansible control node"
                     sshagent(['ansible-server-key']){
-                        sh "scp -o StrictHostKeyChecking=no ansible/* ec2-user@13.244.114.195:/home/ec2-user"
+                        sh "scp -o StrictHostKeyChecking=no ansible/* ec2-user@13.244.117.58:/home/ec2-user"
 
                         withCredentials([sshUserPrivateKey(credentialsId: "ec2-servers-key", keyFileVariable: 'keyfile', usernameVariable: 'user')]){
                             sh  'scp $keyfile ec2-user@13.244.117.58:/home/ec2-user/ssh-key.pem'
