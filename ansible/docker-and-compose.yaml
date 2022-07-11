@@ -2,6 +2,7 @@
 - name: Install python3, docker, docker-compose
   hosts: all
   become: yes
+  gather_facts: False
   tasks:
     - name: Install python3 and docker
       vars:
