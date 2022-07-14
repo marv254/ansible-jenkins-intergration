@@ -39,10 +39,11 @@ pipeline{
                 play = "ansible-playbook docker-and-compose.yaml"
             }
             steps{
-                scripts{
-                    sh "ssh -i ~/.ssh/ansible-server.pem ec2-user@13.245.71.221 $play"
+                script{
+                    sshagent(['ansible-server-key']){
+                        sh "ssh StrictHostKeyChecking=no ec2-user@13.245.71.221 $play"
                    
-                }
+                }}
             }
         }
 }
