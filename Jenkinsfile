@@ -41,7 +41,7 @@ pipeline{
             steps{
                 script{
                     sshagent(['ansible-server-key']){
-                        sh "ssh StrictHostKeyChecking=no ec2-user@13.245.71.221 $play"
+                        sh "ssh -o StrictHostKeyChecking=no ec2-user@13.245.71.221 $play"
                    
                 }}
             }
