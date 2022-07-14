@@ -5,9 +5,9 @@
   gather_facts: False
   tasks:
     - name: Install python3 and docker
-      vars:
-        ansible_python_interpreter: /usr/bin/python
-      yum:
+      # vars:
+      #   ansible_python_interpreter: /usr/bin/python
+      apt:
         name:
           - python3
           - docker
@@ -18,12 +18,12 @@
         url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-{{lookup('pipe', 'uname -m')}}
         dest: /usr/local/bin/docker-compose
         mode: +x
-    - name: Start docker daemon
-      systemd:
-        name: docker
-        state: started
-    - name: Install docker python module
-      pip:
-        name: 
-          - docker
-          - docker-compose
+    # - name: Start docker daemon
+    #   systemd:
+    #     name: docker
+    #     state: started
+    # - name: Install docker python module
+    #   pip:
+    #     name: 
+    #       - docker
+    #       - docker-compose
