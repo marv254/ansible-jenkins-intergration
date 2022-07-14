@@ -1,13 +1,13 @@
 ---
 - name: Install python3, docker, docker-compose
-  hosts: aws_ec2
+  hosts: ubuntu_servers
   become: yes
   gather_facts: False
   tasks:
     - name: Install python3 and docker
       # vars:
       #   ansible_python_interpreter: /usr/bin/python
-      yum:
+      apt:
         name:
           - python3
           - docker
