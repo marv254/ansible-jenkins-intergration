@@ -5,9 +5,9 @@
   gather_facts: False
   tasks:
     - name: Install python3 and docker
-      # vars:
-      #   ansible_python_interpreter: /usr/bin/python
-      apt:
+      vars:
+        ansible_python_interpreter: /usr/bin/python
+      yum:
         name:
           - python3
           - docker
