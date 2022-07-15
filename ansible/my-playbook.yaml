@@ -1,9 +1,0 @@
----
-- name: Install python
-  hosts: all
-  become: yes
-  tasks:
-    - name: Install python
-      yum:
-        name: python
-        state: present
