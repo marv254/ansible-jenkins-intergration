@@ -19,36 +19,38 @@ pipeline{
             }
         }
 
-        stage("execute ansible playbook"){
-          steps{
-            script{
-                echo "Calling ansible playbook to configure ec2 instances"
-                def remote = [:]
-                remote.name = "ansible-server"
-                remote.host = "13.245.95.241"
-                remote.allowAnyHosts = true
+    //     stage("execute ansible playbook"){
+    //       steps{
+    //         script{
+    //             echo "Calling ansible playbook to configure ec2 instances"
+    //             def remote = [:]
+    //             remote.name = "ansible-server"
+    //             remote.host = "13.245.95.241"
+    //             remote.allowAnyHosts = true
 
-                withCredentials([sshUserPrivateKey(credentialsId: "ansible-server-key", keyFileVariable: 'keyfile', usernameVariable: 'user')]){
-                    remote.user = user
-                    remote.identityFile = keyfile
-                    sshCommand remote: remote, command: "ls -l"
-                    sshScript remote: remote, script: "prepare-server.sh"
-                    sshCommand remote: remote, command: "ansible-playbook docker-and-compose.yaml"
+    //             withCredentials([sshUserPrivateKey(credentialsId: "ansible-server-key", keyFileVariable: 'keyfile', usernameVariable: 'user')]){
+    //                 remote.user = user
+    //                 remote.identityFile = keyfile
+    //                 sshCommand remote: remote, command: "ls -l"
+    //                 sshScript remote: remote, script: "prepare-server.sh"
+    //                 sshCommand remote: remote, command: "ansible-playbook docker-and-compose.yaml"
+    //         }
+    //       }  
+    //     }
+    // }
+        stage("execute playbook"){
+            environment {
+                shell_cmd = "bash prepare-server.sh"
+                play = "ansible-playbook docker-and-compose.yaml"
             }
-          }  
-        }
-    }
-        // stage("execute playbook"){
-        //     environment {
-        //         play = "ansible-playbook docker-and-compose.yaml"
-        //     }
-        //     steps{
-        //         script{
-        //             sshagent(['ansible-server-key']){
-        //                 sh "ssh -o StrictHostKeyChecking=no ${ansible_server} $play"
+            steps{
+                script{
+                    sshagent(['ansible-server-key']){
+                        sh "ssh -o StrictHostKeyChecking=no ${ansible_server} $shell_cmd"
+                        sh "ssh -o StrictHostKeyChecking=no ${ansible_server} $play"
                    
-        //         }}
-        //     }
-        // }
+                }}
+            }
+        }
 }
 }
