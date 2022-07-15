@@ -24,7 +24,7 @@ pipeline{
             script{
                 echo "Calling ansible playbook to configure ec2 instances"
                 def remote = [:]
-                remote.name = 'ansible-server'
+                remote.name = 'ansible-serv2'
                 remote.host = '13.245.249.167'
                 remote.allowAnyHosts = true
 
@@ -32,7 +32,7 @@ pipeline{
                     remote.user = user
                     remote.identityFile = keyfile
                     sshCommand remote: remote, command: "ls -l"
-                    // sshCommand remote: remote, command: "ansible-playbook docker-and-compose.yaml"
+                    sshCommand remote: remote, command: "ansible-playbook docker-and-compose.yaml"
             }
           }  
         }
