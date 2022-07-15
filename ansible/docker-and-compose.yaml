@@ -1,6 +1,6 @@
 ---
 - name: Install python3, docker, docker-compose
-  hosts: ubuntu_servers
+  hosts: aws_ec2
   become: yes
   gather_facts: False
   tasks:
